@@ -199,13 +199,16 @@ function addSpotifyUI() {
     mainCtx.fillText("\uf051", centerX + spacing, mainCanvas.height - 40);  // Next
 }
 
-frameSelect.addEventListener('change', () => {
-    if (frameSelect.value !== "none") {
-        bgSelect.value = ""; // Hapus background saat memilih frame
+frameSelect.addEventListener('input', () => {
+    if (frameSelect.value === "none") {
+        if (bgSelect) {
+            bgSelect.value = "white"; // Hapus background saat memilih frame
+        }
     }
     setCanvasSize();
     redrawCanvas();
 });
+
 
 captureButton.addEventListener('click', () => {
     if (photos.length >= 4) {
