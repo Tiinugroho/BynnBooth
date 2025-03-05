@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BynnBooth</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="shortcut icon" href="OIP.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">BynnBooth</h2>
+
+        <div class="row">
+            <div class="col-12 col-md-6 text-center">
+                <div class="card-video w-100">
+                    <!-- <video id="video" autoplay></video> -->
+                    <video id="video" autoplay playsinline></video>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6 col-md-4 mb-3">
+                        <label class="form-label">Pilih Background:</label>
+                        <select id="bgSelect" class="form-select">
+                            <option value="">- Pilih Warna -</option>
+                            <option value="white">Putih</option>
+                            <option value="lightblue">Biru Muda</option>
+                            <option value="lightpink">Pink Muda</option>
+                            <option value="lightgreen">Hijau Muda</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-4 mb-3">
+                        <label class="form-label">Pilih Layout Grid:</label>
+                        <select id="gridSelect" class="form-select">
+                            <option value="2x2">Grid 2x2</option>
+                            <option value="1x4">Grid 1x4</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-4 mb-3">
+                        <label class="form-label">Pilih Frame:</label>
+                        <select id="frameSelect" class="form-select">
+                            <option value="none">Tanpa Frame</option>
+                            <option value="space">Space</option>
+                            <option value="arcade">Arcade</option>
+                            <option value="arcade2">Arcade-2</option>
+                            <option value="spotify">Spotify</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-6 col-sm-4 col-md-4 mb-3">
+                        <button id="capture" class="btn btn-primary w-100">Ambil Foto</button>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4 mb-3">
+                        <button id="reset" class="btn btn-danger w-100">Hapus Foto</button>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4 mb-3">
+                        <button id="print" class="btn btn-success w-100">Cetak</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div id="print-area">
+                    <canvas id="mainCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
