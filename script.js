@@ -92,20 +92,30 @@ function addCopyrightTextToSpotify() {
 }
 
 function redrawCanvas() {
-    mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+    mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height); // Bersihkan canvas
 
     let frameImage = new Image();
     let framePath = getFramePath(frameSelect.value);
 
-    if (framePath) {
-        frameImage.src = framePath;
-        frameImage.onload = function () {
-            mainCtx.drawImage(frameImage, 0, 0, mainCanvas.width, mainCanvas.height);
-            drawPhotosAndText(); // Pastikan foto & teks tetap digambar setelah frame diterapkan
-        };
+    if (framePath || frameSelect.value === "spotify") {
+        // Hapus background jika frame dipilih
+        bgSelect.value = ""; // Reset background saat frame dipilih
+
+        if (frameSelect.value === "spotify") {
+            mainCtx.fillStyle = getSpotifyGradient();
+            mainCtx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
+            drawPhotosAndText();
+        } else {
+            frameImage.onload = function () {
+                mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height); // Pastikan canvas bersih
+                mainCtx.drawImage(frameImage, 0, 0, mainCanvas.width, mainCanvas.height);
+                drawPhotosAndText();
+            };
+            frameImage.src = framePath;
+        }
     } else {
-        // Jika tidak ada frame, langsung set warna latar belakang
-        mainCtx.fillStyle = frameSelect.value === "spotify" ? getSpotifyGradient() : bgSelect.value;
+        // Jika tidak ada frame, gunakan warna background
+        mainCtx.fillStyle = bgSelect.value || "#FFFFFF";
         mainCtx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
         drawPhotosAndText();
     }
@@ -201,14 +211,11 @@ function addSpotifyUI() {
 
 frameSelect.addEventListener('input', () => {
     if (frameSelect.value === "none") {
-        if (bgSelect) {
-            bgSelect.value = "white"; // Hapus background saat memilih frame
-        }
+        bgSelect.value = "white"; // Set background ke putih jika tanpa frame
     }
     setCanvasSize();
     redrawCanvas();
 });
-
 
 captureButton.addEventListener('click', () => {
     if (photos.length >= 4) {
